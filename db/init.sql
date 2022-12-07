@@ -4,8 +4,6 @@ CREATE SCHEMA shops;
 CREATE SCHEMA storages;
 CREATE SCHEMA users;
 
-
-
 create table products.product_list
 (
     id           serial
@@ -318,4 +316,92 @@ alter table orders.order
 
 create unique index order_id_uindex
     on orders.order (id);
+
+
+-- insert into users.user
+insert into users.user(username, password, name, second_name, email, phone, address)
+values ('1admin', 'admin1', 'daniil', 'kritsin', 'daniil1@kritinidzin.ru', '1+79643580711', 'г.Москва');
+insert into users.user(username, password, name, second_name, email, phone, address)
+values ('2admin', 'admin2', 'daniil', 'kritsin', 'daniil2@kritinidzin.ru', '2+79643580711', 'г.Москва');
+insert into users.user(username, password, name, second_name, email, phone, address)
+values ('3admin', 'admin3', 'daniil', 'kritsin', 'daniil3@kritinidzin.ru', '3+79643580711', 'г.Москва');
+insert into users.user(username, password, name, second_name, email, phone, address)
+values ('4admin', 'admin4', 'daniil', 'kritsin', 'daniil4@kritinidzin.ru', '4+79643580711', 'г.Москва');
+insert into users.user(username, password, name, second_name, email, phone, address)
+values ('5admin', 'admin5', 'daniil', 'kritsin', 'daniil5@kritinidzin.ru', '5+79643580711', 'г.Москва');
+
+-- insert into users.session
+insert into users.sessions(user_id, session_key, is_active, expired_at)
+values (1,'session_key',true, now());
+insert into users.sessions(user_id, session_key, is_active, expired_at)
+values (2,'session_key',true, now());
+insert into users.sessions(user_id, session_key, is_active, expired_at)
+values (3,'session_key',true, now());
+insert into users.sessions(user_id, session_key, is_active, expired_at)
+values (4,'session_key',true, now());
+insert into users.sessions(user_id, session_key, is_active, expired_at)
+values (5,'session_key',true, now());
+
+-- insert into users.role_list
+insert into users.role_list(name, display_name, is_active) values('1admin', '1admin', true);
+insert into users.role_list(name, display_name, is_active) values('2admin', '2admin', true);
+insert into users.role_list(name, display_name, is_active) values('3admin', '3admin', true);
+insert into users.role_list(name, display_name, is_active) values('4admin', '4admin', true);
+insert into users.role_list(name, display_name, is_active) values('5admin', '5admin', true);
+
+-- insert into users.role
+insert into users.role(user_id, role_id) values(1, 1);
+insert into users.role(user_id, role_id) values(2, 2);
+insert into users.role(user_id, role_id) values(3, 3);
+insert into users.role(user_id, role_id) values(4, 4);
+insert into users.role(user_id, role_id) values(5, 5);
+
+-- insert into users.favourites
+insert into users.favourites(user_id, product_id) values(1, 1);
+insert into users.favourites(user_id, product_id) values(2, 2);
+insert into users.favourites(user_id, product_id) values(3, 3);
+insert into users.favourites(user_id, product_id) values(4, 4);
+insert into users.favourites(user_id, product_id) values(5, 5);
+
+-- insert into users.cart
+insert into users.cart(user_id, product_id, amount) values(1,1,1);
+insert into users.cart(user_id, product_id, amount) values(2,2,2);
+insert into users.cart(user_id, product_id, amount) values(3,3,3);
+insert into users.cart(user_id, product_id, amount) values(4,4,4);
+insert into users.cart(user_id, product_id, amount) values(5,5,5);
+
+-- insert into products.product_list
+insert into products.product_list(name, display_name, is_active) values('1orange', '1orange', true);
+insert into products.product_list(name, display_name, is_active) values('2orange', '2orange', true);
+insert into products.product_list(name, display_name, is_active) values('3orange', '3orange', true);
+insert into products.product_list(name, display_name, is_active) values('4orange', '4orange', true);
+insert into products.product_list(name, display_name, is_active) values('5orange', '5orange', true);
+
+-- insert into products.category
+insert into products.category(name, display_name) values('1category', '1category');
+insert into products.category(name, display_name) values('2category', '2category');
+insert into products.category(name, display_name) values('3category', '3category');
+insert into products.category(name, display_name) values('4category', '4category');
+insert into products.category(name, display_name) values('5category', '5category');
+
+-- insert into products.product
+insert into products.product(product_id, category_id, price, amount) values(1,1,1,10);
+insert into products.product(product_id, category_id, price, amount) values(2,2,2,10);
+insert into products.product(product_id, category_id, price, amount) values(3,3,3,10);
+insert into products.product(product_id, category_id, price, amount) values(4,4,4,10);
+insert into products.product(product_id, category_id, price, amount) values(5,5,5,10);
+
+--insert into users.favourites
+insert into users.favourites(user_id, product_id) values(1, 1);
+insert into users.favourites(user_id, product_id) values(2, 2);
+insert into users.favourites(user_id, product_id) values(3, 3);
+insert into users.favourites(user_id, product_id) values(4, 4);
+insert into users.favourites(user_id, product_id) values(5, 5);
+
+--insert into users.cart
+insert into users.cart(user_id, product_id, amount) values(1,1,1);
+insert into users.cart(user_id, product_id, amount) values(2,2,2);
+insert into users.cart(user_id, product_id, amount) values(3,3,3);
+insert into users.cart(user_id, product_id, amount) values(4,4,4);
+insert into users.cart(user_id, product_id, amount) values(5,5,5);
 
