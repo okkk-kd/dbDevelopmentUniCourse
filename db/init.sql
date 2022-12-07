@@ -427,22 +427,86 @@ insert into orders.order(user_id, product_id, amount, created_at, updated_at, pr
 insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(5,5,5,now(),now(),10);
 
 -- select orders
+select 'orders';
+select 'select * from orders.order;';
 select * from orders.order;
+select 'select * from orders.order where id > 2;';
+select * from orders.order where id > 2;
+select 'select * from orders.order where id = 2;';
+select * from orders.order where id = 2;
+select 'select * from orders.order where id < 2;';
+select * from orders.order where id < 2;
+select 'select * from orders.order where id != 2;';
+select * from orders.order where id != 2;
+select 'select * from orders.order where id between 2 and 10;';
+select * from orders.order where id between 2 and 10;
+
 
 -- select products
+select 'products';
+select 'select * from products.category;';
 select * from products.category;
+select 'select * from products.product;';
 select * from products.product;
+select 'select * from products.product_list;';
 select * from products.product_list;
+select 'inner join';
+select c.display_name as "category_name",
+       l.display_name as "product name",
+       l.is_active    as "status",
+       p.amount,
+       p.price
+from products.product p
+         inner join products.category c on c.id = p.category_id
+         inner join products.product_list l on l.id = p.product_id
+where p.id between 2 and 6;
+
+
 
 -- select shops
+select 'shops';
+select 'select * from shops.shop;';
 select * from shops.shop;
+select 'select * from shops.shop_list;';
 select * from shops.shop_list;
 
+select 'with included condition';
+select *
+from shops.shop s
+where s.product_id = (select id from shops.shop_list sl where sl.name = '1storage');
+
+select 'update with included condition';
+update shops.shop
+set amount = 99
+where product_id = (select id from shops.shop_list sl where sl.name = '1storage');
+
+select 'with included condition';
+select *
+from shops.shop s
+where s.product_id = (select id from shops.shop_list sl where sl.name = '1storage');
+
+
+
 -- select storages
+select 'storage';
+select 'select * from storages.storage;';
 select * from storages.storage;
+select 'select * from storages.storage_list;';
 select * from storages.storage_list;
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,1,11,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,2,12,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,3,13,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,4,14,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,5,15,true);
+select 'right join';
+select
+    sl.display_name
+from storages.storage s
+         right join storages.storage_list sl on sl.id = s.storage_id
+where s.id > 2;
 
 -- select users
+select 'users';
 select * from users.favourites;
 select * from users.role;
 select * from users.role_list;
