@@ -405,3 +405,37 @@ insert into users.cart(user_id, product_id, amount) values(3,3,3);
 insert into users.cart(user_id, product_id, amount) values(4,4,4);
 insert into users.cart(user_id, product_id, amount) values(5,5,5);
 
+-- insert into storages.storage_list
+insert into storages.storage_list(name, display_name, address) values('1storage', '1storage', '1address');
+insert into storages.storage_list(name, display_name, address) values('2storage', '2storage', '2address');
+insert into storages.storage_list(name, display_name, address) values('3storage', '3storage', '3address');
+insert into storages.storage_list(name, display_name, address) values('4storage', '4storage', '4address');
+insert into storages.storage_list(name, display_name, address) values('5storage', '5storage', '5address');
+
+-- insert into storages.store
+insert into storages.storage(storage_id, product_id, amount, is_active) values(1,1,1,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(2,2,2,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(3,3,3,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(4,4,4,true);
+insert into storages.storage(storage_id, product_id, amount, is_active) values(5,5,5,true);
+
+-- insert into shops.shop_list
+insert into shops.shop_list(name, display_name, address) values('1storage', '1storage', '1address');
+insert into shops.shop_list(name, display_name, address) values('2storage', '2storage', '2address');
+insert into shops.shop_list(name, display_name, address) values('3storage', '3storage', '3address');
+insert into shops.shop_list(name, display_name, address) values('4storage', '4storage', '4address');
+insert into shops.shop_list(name, display_name, address) values('5storage', '5storage', '5address');
+
+-- insert into shops.shop
+insert into shops.shop(shop_id, product_id, amount, is_active) values(1,1,1,true);
+insert into shops.shop(shop_id, product_id, amount, is_active) values(2,2,2,true);
+insert into shops.shop(shop_id, product_id, amount, is_active) values(3,3,3,true);
+insert into shops.shop(shop_id, product_id, amount, is_active) values(4,4,4,true);
+insert into shops.shop(shop_id, product_id, amount, is_active) values(5,5,5,true);
+
+-- insert into orders.order
+insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(1,1,1,now(),now(),10);
+insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(2,2,2,now(),now(),10);
+insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(3,3,3,now(),now(),10);
+insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(4,4,4,now(),now(),10);
+insert into orders.order(user_id, product_id, amount, created_at, updated_at, price) values(5,5,5,now(),now(),10);
