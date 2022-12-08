@@ -448,8 +448,8 @@ select 'select * from products.category;';
 select * from products.category;
 select 'select * from products.product;';
 select * from products.product;
-select 'select * from products.product_list;';
-select * from products.product_list;
+select 'select * from products.product_list where is_active = true;';
+select * from products.product_list where is_active = true;
 select 'inner join';
 select c.display_name as "category_name",
        l.display_name as "product name",
@@ -465,8 +465,8 @@ where p.id between 2 and 6;
 
 -- select shops
 select 'shops';
-select 'select * from shops.shop;';
-select * from shops.shop;
+select 'select * from shops.shop where id between 2 and 10;';
+select * from shops.shop where id between 2 and 10;
 select 'select * from shops.shop_list;';
 select * from shops.shop_list;
 
@@ -513,3 +513,59 @@ select * from users.role_list;
 select * from users.sessions;
 select * from users.cart;
 select * from users.user;
+
+-- init routines
+create function products.make_inactive_products_func() returns trigger as '
+    begin
+        if (new.amount <= 0) then
+            update products.product_list
+            set is_active = false where id = new.product_id;
+        elseif (new.amount >= 0) then
+            update products.product_list
+            set is_active = true
+            where id = new.product_id;
+        end if;
+        return null;
+    end;
+'language plpgsql;
+
+create function shops.amount_calc_update_func() returns trigger as '
+    begin
+        if (new.amount <= 0) then
+            update shops.shop set is_active = false where id = new.id;
+        else
+            update shops.shop set is_active = true where id = new.id;
+        end if;
+        update products.product set amount = amount + (new.amount - old.amount) where id = new.id;
+        return null;
+    end;
+'language plpgsql;
+
+create function storages.amount_calc_update_func() returns trigger as '
+    begin
+        if (new.amount <= 0) then
+            update storages.storage set is_active = false where id = new.id;
+        else
+            update storages.storage set is_active = true where id = new.id;
+        end if;
+        update products.product set amount = amount + (new.amount - old.amount) where id = new.id;
+        return null;
+    end;
+'language plpgsql;
+
+-- init triggers
+create trigger make_inactive_products
+    after update on products.product for each row
+execute procedure products.make_inactive_products_func();
+
+create trigger amount_calc_update
+    after update on shops.shop
+    for each row
+    when (old.amount is distinct from new.amount)
+execute function shops.amount_calc_update_func();
+
+create trigger amount_calc_update
+    after update on storages.storage
+    for each row
+    when (old.amount is distinct from new.amount)
+execute function storages.amount_calc_update_func();
