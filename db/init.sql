@@ -428,14 +428,17 @@ insert into orders.order(user_id, product_id, amount, created_at, updated_at, pr
 
 -- select orders
 select 'orders';
-select 'select * from orders.order;';
 select * from orders.order;
 select 'select * from orders.order where id > 2;';
 select * from orders.order where id > 2;
+select 'select * from orders.order where id >= 2;';
+select * from orders.order where id >= 2;
 select 'select * from orders.order where id = 2;';
 select * from orders.order where id = 2;
 select 'select * from orders.order where id < 2;';
 select * from orders.order where id < 2;
+select 'select * from orders.order where id <= 2;';
+select * from orders.order where id <= 2;
 select 'select * from orders.order where id != 2;';
 select * from orders.order where id != 2;
 select 'select * from orders.order where id between 2 and 10;';
@@ -448,6 +451,20 @@ select 'select * from products.category;';
 select * from products.category;
 select 'select * from products.product;';
 select * from products.product;
+select 'select * from products.product_list where name like _orange;';
+select * from products.product_list where name like '_orange';
+insert into products.product_list(name, display_name, is_active) values('cucumber', 'cucumber', true);
+insert into products.product_list(name, display_name, is_active) values(null, null, true);
+insert into products.product_list(name, display_name, is_active) values(null, null, true);
+insert into products.product_list(name, display_name, is_active) values(null, null, true);
+select 'select * from products.product_list where name not like _orange;';
+select * from products.product_list where name not like '_orange';
+select 'select * from products.product_list where name is not null;';
+select * from products.product_list where name is not null;
+select 'select * from products.product_list where name is null;';
+select * from products.product_list where name is null;
+
+
 select 'select * from products.product_list where is_active = true;';
 select * from products.product_list where is_active = true;
 select 'inner join';
